@@ -6,6 +6,7 @@
 #include <semaphore.h>
 
 int NUMBER_OF_ITERATIONS = 30;
+int COLORS = 1;
 
 // Funkcje pomocnicze
 void delayRandom(void);
@@ -13,13 +14,17 @@ void delayRandom(void);
 // Filozofowie i sztućce
 enum { THINKING, HUNGRY, EATING };
 const char * philosophersNames[5] = { "Aristotle", "Socrates", "Zeno of Elea", "Plato", "Xenophanes" };
+const char * philosophersColors[5] = { "\033[0;31m", "\033[0;32m", "\033[0;33m", "\033[0;34m", "\033[0;35m" };
 
 pthread_t Philosophers[5];
 sem_t Forks[5];
 
 void putState(int id, const char * state)
 {
-  printf("%s is %s...\n", philosophersNames[id], state);
+  if (COLORS)
+    printf("%s%s is %s...\033[0m\n", philosophersColors[id], philosophersNames[id], state);
+  else
+    printf("%s is %s...\n", philosophersNames[id], state);
 }
 
 void * lifeOfThePhilosopher(void * args)
@@ -52,8 +57,6 @@ int main()
   // inicjowanie semaforów
   for (int i = 0; i < 5; i++)
     sem_init(&Forks[i], 0, 1);
-
-
 
   // startowanie wątków
   int * id;
