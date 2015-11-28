@@ -12,45 +12,51 @@ int COLORS = 1;
 void delayRandom(void);
 
 // Filozofowie i sztućce
-enum { THINKING, HUNGRY, EATING };
 const char * philosophersNames[5] = { "Aristotle", "Socrates", "Zeno of Elea", "Plato", "Xenophanes" };
 const char * philosophersColors[5] = { "\033[0;31m", "\033[0;32m", "\033[0;33m", "\033[0;34m", "\033[0;35m" };
 
 pthread_t Philosophers[5];
 sem_t Forks[5];
+int forksInUse = 0;
 
 void putState(int id, const char * state)
 {
   if (COLORS)
-    printf("%s%s is %s...\033[0m\n", philosophersColors[id], philosophersNames[id], state);
+    printf("%s%s %s\033[0m\n", philosophersColors[id], philosophersNames[id], state);
   else
-    printf("%s is %s...\n", philosophersNames[id], state);
+    printf("%s %s\n", philosophersNames[id], state);
 }
 
 void * lifeOfThePhilosopher(void * args)
 {
   int id = *((int *)args);
   free(args);
-  int i = 0;
-  while (i++ < NUMBER_OF_ITERATIONS)
+  for (int i = 0; i < NUMBER_OF_ITERATIONS; i++)
   {
-    putState(id, "thinking");
+    putState(id, "is thinking...");
     delayRandom();
-    putState(id, "hungry");
+    putState(id, "is hungry...");
     int left = id;
     int right = (id + 1) % 5;
-    sem_wait(&Forks[id]);
-    sem_wait(&Forks[(id + 1) % 5]);
-    putState(id, "eating");
+    sem_wait(&Forks[left]);
+    sem_wait(&Forks[right]);
+    putState(id, "is eating...");
     delayRandom();
-    sem_post(&Forks[id]);
-    sem_post(&Forks[id]);
+    sem_post(&Forks[left]);
+    sem_post(&Forks[right]);
   }
+  putState(id, "finished.");
 }
 
-
-int main()
+int main(int argc, char *argv[])
 {
+  if (argc >= 2)
+  {
+    NUMBER_OF_ITERATIONS = atoi(argv[1]);
+    if (argc == 3)
+      COLORS = atoi(argv[2]);
+  }
+
   int tret; // wartość zwracana przez różne pthread_funkcja()
   srand(time(NULL));
 
