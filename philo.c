@@ -7,8 +7,9 @@
 
 int NUMBER_OF_ITERATIONS = 30;
 int COLORS = 1;
+int SPEED = 7;
 
-// Funkcje pomocnicze
+// Funkcja pomocnicza
 void delayRandom(void);
 
 // Filozofowie i sztućce
@@ -17,7 +18,6 @@ const char * philosophersColors[5] = { "\033[0;31m", "\033[0;32m", "\033[0;33m",
 
 pthread_t Philosophers[5];
 sem_t Forks[5];
-int forksInUse = 0;
 
 void putState(int id, const char * state)
 {
@@ -36,14 +36,15 @@ void * lifeOfThePhilosopher(void * args)
     putState(id, "is thinking...");
     delayRandom();
     putState(id, "is hungry...");
-    int left = id;
-    int right = (id + 1) % 5;
-    sem_wait(&Forks[left]);
-    sem_wait(&Forks[right]);
+    // ustalenie hierarchii zasobów ~Dijkstra
+    int lowFork = (id == 4 ? 0 : id);
+    int highFork = (id == 4 ? 4 : (id + 1));
+    sem_wait(&Forks[lowFork]);
+    sem_wait(&Forks[highFork]);
     putState(id, "is eating...");
     delayRandom();
-    sem_post(&Forks[left]);
-    sem_post(&Forks[right]);
+    sem_post(&Forks[highFork]);
+    sem_post(&Forks[lowFork]);
   }
   putState(id, "finished.");
 }
@@ -51,11 +52,9 @@ void * lifeOfThePhilosopher(void * args)
 int main(int argc, char *argv[])
 {
   if (argc >= 2)
-  {
     NUMBER_OF_ITERATIONS = atoi(argv[1]);
-    if (argc == 3)
-      COLORS = atoi(argv[2]);
-  }
+  if (argc == 3)
+    COLORS = atoi(argv[2]);
 
   int tret; // wartość zwracana przez różne pthread_funkcja()
   srand(time(NULL));
@@ -91,7 +90,7 @@ int main(int argc, char *argv[])
   return 0;
 }
 
-// Funkcje pomocnicze
+// Funkcja pomocnicza
 void delayRandom()
 {
   int random = rand();
