@@ -12,6 +12,9 @@ Moje rozwiązanie stanowi implementację oryginalnego rozwiązania E. Dijkstry p
 
 #### Instalacja
 Aby skompilować program wystarczy uruchomić:
+
 ```make configure```
+
 lub:
+
 ```make```
