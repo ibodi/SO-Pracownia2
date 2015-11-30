@@ -29,15 +29,16 @@ Program przyjmuje kilka parametrów:
 [-c] - 0 lub 1. Określa czy wyjście będzie kolorowane (domyślnie 1).
 ```
 Przykładowe uruchomienia:
-A)
+
+A) uruchomienie 20 iteracji z prędkością 5 i kolorami
 ```
-./Philo -i 30 -s 5 -c 0
+./Philo -i 20 -s 5 -c 1
 ```
 lub:
 ```
-make run ARGS="-i 30 -s 5 -c 0"
+make run ARGS="-i 20 -s 5 -c 1"
 ```
-B)
+B) uruchomienie 5 iteracji z domyślną prędkością 9 i domyślnie włączonymi kolorami
 ```
 ./Philo -s 5
 ```
@@ -45,3 +46,22 @@ lub:
 ```
 make run ARGS="-s 5"
 ```
+
+####Test
+Program jest łatwo testowalny. Dla prędkości 0 (tzn. czynności filozofów trwają albo zero, albo jedną jednostkę czasu) i dużej liczby operacji z dużym prawdopodobieństwem może wystąpić zjawisko potencjalnego *deadlocka*. Jednak dzięki hierarchii zasobów problem nie wystąpi.
+Aby przetestować program wystarczy uruchomić:
+```
+make test
+```
+co skutkuje uruchomieniem programu z parametrami:
+```
+-s 0 -i 1000 -c 1
+```
+
+###Usuwanie
+Aby usunąć program wystarczy uruchomić:
+```
+make clean
+```
+
+30.11.2015, Oskar Wieczorek
