@@ -86,16 +86,16 @@ int main(int argc, char *argv[])
     *id = i;
     if (tret = pthread_create(&Philosophers[i], NULL, lifeOfThePhilosopher, (void *)id))
     {
-      fprintf(stderr,"Error from pthread_create(). Returned %i instead of 0.", tret); // error code display
+      fprintf(stderr,"Error from pthread_create(). Returned %i instead of 0.", tret); // wyświetlanie kodu błędu
       exit(EXIT_FAILURE);
     }
   }
 
   // kończenie wątków
   for (int i = 0; i < 5; i++)
-    if (tret = pthread_join(Philosophers[i], NULL)) // joins back the pthread
+    if (tret = pthread_join(Philosophers[i], NULL))
     {
-      fprintf(stderr, "Error from pthread_join(). Returned %i instead of 0.", tret); // error code display
+      fprintf(stderr, "Error from pthread_join(). Returned %i instead of 0.", tret); // wyświetlanie kodu błędu
       exit(EXIT_FAILURE);
     }
 
