@@ -24,7 +24,7 @@ make
 Program przyjmuje kilka parametrów:
 ```
 [-i] - określa liczbę iteracji filozofów (domyślnie 30).
-[-s] - SPEED (od 0 do 9): określa maksymalny zakres, z którego będą losowane 
+[-s] - SPEED (od 0 do 9): określa maksymalny [0, 10^SPEED] zakres, z którego będą losowane 
        czasy wykonywania czynności przez filozofów (domyślnie 9)
 [-c] - 0 lub 1. Określa czy wyjście będzie kolorowane (domyślnie 1).
 ```
