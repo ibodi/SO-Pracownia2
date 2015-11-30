@@ -4,6 +4,9 @@ Poniższy program stanowi ilustrację rozwiązania klasycznego problemu synchron
 Jak wiadomo życie filozofa polega albo na jedzeniu spaghetti, albo na myśleniu. Każdy filozof albo myśli, albo je, przy czym do jedzenia potrzebuje obu najbliższych mu widelców. Podczas implementacji mogą wystąpić następujące problemy:
 
 * deadlock
+dasda
 * livelock
+dasda
 * głodzenie
+dasa
 
