@@ -28,7 +28,8 @@ Program przyjmuje kilka parametrów:
 
 ```
 [-i] - określa liczbę iteracji filozofów (domyślnie 30).
-[-s] - SPEED: określa maksymalny zakres, z którego będzie losowany czas czynności filozofów (domyślnie 9)
+[-s] - SPEED: określa maksymalny zakres, z którego będzie losowane 
+       czasy wykonywania czynności przez filozofów (domyślnie 9)
 [-c] - 0 lub 1. Określa czy wyjście będzie kolorowane (domyślnie 1).
 ```
 ```
