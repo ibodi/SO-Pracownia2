@@ -1,6 +1,6 @@
 # Pracownia P2 
 #### Problem Pięciu Filozofów
-Poniższy program stanowi ilustrację rozwiązania klasycznego problemu synchronizacji zwanego *Problemem Pięciu Filozofów*, który został wymyślony przez E. Dijkstrę w 1965 roku, jako zadanie egzaminacyjne. Problem polega na skordynowaniu działań pięciu ucztujących filozofów. Filozofowie siedzą przy okrągłym stole nad wielką misą spaghetti. Pomiędzy nimi znajduje się pięć widelców.
+Poniższy program stanowi ilustrację rozwiązania klasycznego problemu synchronizacji zwanego *Problemem Pięciu Filozofów*, który został wymyślony przez E. Dijkstrę w 1965 roku, jako zadanie egzaminacyjne. Problem polega na skoordynowaniu działań pięciu ucztujących filozofów. Filozofowie siedzą przy okrągłym stole nad wielką misą spaghetti. Pomiędzy nimi znajduje się pięć widelców.
 Jak wiadomo życie filozofa polega albo na jedzeniu spaghetti, albo na myśleniu. Każdy filozof albo myśli, albo je, przy czym do jedzenia potrzebuje obu najbliższych mu widelców. Widelce nie mogą być dzielone. W rozwiązaniu trzeba poradzić sobie z następującymi problemami.
 
 * *deadlock* - gdy każdy filozof weźmie odpowiednio lewy/prawy widelec. Każdy z nich oczekuje na kolejny widelec, ale nigdy go nie dostanie. Układ jest zablokowany.
