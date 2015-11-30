@@ -64,4 +64,6 @@ Aby usunąć program wystarczy uruchomić:
 make clean
 ```
 
-30.11.2015, Oskar Wieczorek
+
+
+*30.11.2015, Oskar Wieczorek*
