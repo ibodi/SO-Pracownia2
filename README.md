@@ -12,28 +12,34 @@ Moje rozwiązanie stanowi implementację oryginalnego rozwiązania E. Dijkstry p
 
 #### Instalacja
 Aby skompilować program wystarczy uruchomić:
-
 ```
 make configure
 ```
-
 lub:
-
 ```
 make
 ```
 
 #### Uruchomienie
 Program przyjmuje kilka parametrów:
-
 ```
 [-i] - określa liczbę iteracji filozofów (domyślnie 30).
-[-s] - SPEED: określa maksymalny zakres, z którego będą losowane 
+[-s] - SPEED (od 0 do 9): określa maksymalny zakres, z którego będą losowane 
        czasy wykonywania czynności przez filozofów (domyślnie 9)
 [-c] - 0 lub 1. Określa czy wyjście będzie kolorowane (domyślnie 1).
 ```
-
 Przykładowe uruchomienia:
 ```
-
+./Philo -i 30 -s 5 -c 0
+```
+lub:
+```
+make run ARGS="-i 30 -s 5 -c 0"
+```
+```
+./Philo -s 5
+```
+lub:
+```
+make run ARGS="-s 5"
 ```
