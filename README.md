@@ -29,6 +29,7 @@ Program przyjmuje kilka parametrów:
 [-c] - 0 lub 1. Określa czy wyjście będzie kolorowane (domyślnie 1).
 ```
 Przykładowe uruchomienia:
+A)
 ```
 ./Philo -i 30 -s 5 -c 0
 ```
@@ -36,6 +37,7 @@ lub:
 ```
 make run ARGS="-i 30 -s 5 -c 0"
 ```
+B)
 ```
 ./Philo -s 5
 ```
