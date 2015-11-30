@@ -1,2 +1,2 @@
 # Pracownia P2 
-## Problem pięciu filozofów
+### Problem pięciu filozofów
