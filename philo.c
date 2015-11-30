@@ -1,13 +1,13 @@
 #include <stdio.h>
-#include <time.h>
 #include <stdlib.h>
-#include <stdint.h>
+#include <string.h>
+#include <math.h>
 #include <pthread.h>
 #include <semaphore.h>
 
-int NUMBER_OF_ITERATIONS = 30;
-int COLORS = 1;
-int SPEED = 7;
+unsigned int NUMBER_OF_ITERATIONS = 30;
+unsigned int COLORS = 1;
+unsigned int SPEED = 9;
 
 // Funkcja pomocnicza
 void delayRandom(void);
@@ -34,7 +34,7 @@ void * lifeOfThePhilosopher(void * args)
   for (int i = 0; i < NUMBER_OF_ITERATIONS; i++)
   {
     putState(id, "is thinking...");
-    delayRandom();
+    delayRandom(); // sumulacja wykonania czynności przez filozofa
     putState(id, "is hungry...");
     // ustalenie hierarchii zasobów ~Dijkstra
     int lowFork = (id == 4 ? 0 : id);
@@ -42,7 +42,7 @@ void * lifeOfThePhilosopher(void * args)
     sem_wait(&Forks[lowFork]);
     sem_wait(&Forks[highFork]);
     putState(id, "is eating...");
-    delayRandom();
+    delayRandom(); // sumulacja wykonania czynności przez filozofa
     sem_post(&Forks[highFork]);
     sem_post(&Forks[lowFork]);
   }
@@ -51,10 +51,25 @@ void * lifeOfThePhilosopher(void * args)
 
 int main(int argc, char *argv[])
 {
-  if (argc >= 2)
-    NUMBER_OF_ITERATIONS = atoi(argv[1]);
-  if (argc == 3)
-    COLORS = atoi(argv[2]);
+  // wczytywanie parametrów programu
+  for (int i = 1; i < argc; i += 2)
+  {
+    if (!strcmp(argv[i], "-i"))
+      NUMBER_OF_ITERATIONS = atoi(argv[i+1]);
+    if (!strcmp(argv[i], "-s"))
+      SPEED = atoi(argv[i+1]);
+    if (!strcmp(argv[i], "-c"))
+      COLORS = atoi(argv[i+1]);
+  }
+
+  // normalizacja prędkości wykonania
+  if (SPEED > 9)
+    SPEED = 9;
+  else if (SPEED < 0)
+    SPEED = 0;
+
+  // info
+  printf("speed: %d, iterations %d, %s\n", SPEED, NUMBER_OF_ITERATIONS, COLORS ? "with colors" : "without colors");
 
   int tret; // wartość zwracana przez różne pthread_funkcja()
   srand(time(NULL));
@@ -93,6 +108,6 @@ int main(int argc, char *argv[])
 // Funkcja pomocnicza
 void delayRandom()
 {
-  int random = rand();
+  int random = rand() % (int)pow(10, SPEED);
   while (random-- >= 1);
 }
