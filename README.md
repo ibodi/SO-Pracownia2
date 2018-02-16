@@ -47,7 +47,7 @@ lub:
 make run ARGS="-s 5"
 ```
 
-####Test
+#### Test
 Program jest łatwo testowalny. Dla prędkości 0 (tzn. czynności filozofów trwają albo zero, albo jedną jednostkę czasu) i dużej liczby operacji z dużym prawdopodobieństwem może wystąpić zjawisko potencjalnego *deadlocka*. Jednak dzięki hierarchii zasobów problem nie wystąpi.
 Aby przetestować program wystarczy uruchomić:
 ```
@@ -58,7 +58,7 @@ co skutkuje uruchomieniem programu z parametrami:
 -s 0 -i 1000 -c 1
 ```
 
-###Usuwanie
+### Usuwanie
 Aby usunąć program wystarczy uruchomić:
 ```
 make clean
